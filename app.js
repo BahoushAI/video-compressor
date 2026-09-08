@@ -34,10 +34,6 @@ if (localStorage.getItem(APP_ACCESS_KEY) !== "granted") {
 // ===== End Local Access Gate =====
 
 import { Input, Output, Conversion, ALL_FORMATS, BufferSource, Mp4OutputFormat, BufferTarget, Quality } from "mediabunny";
-import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { toBlobURL } from "@ffmpeg/util";
-
-const ffmpeg = new FFmpeg();
 
 const videoInput = document.getElementById("videoInput");
 const selectBtn = document.getElementById("selectBtn");
@@ -47,7 +43,6 @@ const saveLink = document.getElementById("saveLink");
 
 let selectedFile = null;
 let selectedFileData = null;
-let progressHandlerAdded = false;
 let previousOutputURL = null;
 
 function formatSize(bytes) {
@@ -195,48 +190,6 @@ compressBtn.addEventListener("click", async () => {
   saveLink.style.display = "none";
 
   try {
-    status.innerHTML =
-      "در حال آماده‌سازی موتور فشرده‌سازی...";
-
-    if (!ffmpeg.loaded) {
-      const baseURL =
-        window.location.origin + "/ffmpeg";
-
-      const coreURL = await toBlobURL(
-        `${baseURL}/ffmpeg-core.js`,
-        "text/javascript"
-      );
-
-      const wasmURL = await toBlobURL(
-        `${baseURL}/ffmpeg-core.wasm`,
-        "application/wasm"
-      );
-
-      await ffmpeg.load({
-        coreURL,
-        wasmURL
-      });
-    }
-
-    if (!progressHandlerAdded) {
-      ffmpeg.on(
-        "progress",
-        ({ progress }) => {
-          showProgress(progress * 100);
-        }
-      );
-
-      progressHandlerAdded = true;
-    }
-
-    try {
-      await ffmpeg.deleteFile("input.mp4");
-    } catch {}
-
-    try {
-      await ffmpeg.deleteFile("output.mp4");
-    } catch {}
-
     status.innerHTML = "در حال فشرده‌سازی سریع با WebCodecs...";
 
 
