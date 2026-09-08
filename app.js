@@ -1,5 +1,5 @@
 // ===== Local Access Gate =====
-const APP_ACCESS_PASSWORD = "2020";
+const APP_ACCESS_PASSWORD = "9090";
 const APP_ACCESS_KEY = "video-compressor-access";
 
 if (localStorage.getItem(APP_ACCESS_KEY) !== "granted") {
