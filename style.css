@@ -89,3 +89,22 @@ button:disabled {
 .channel-link a:hover {
   text-decoration: underline;
 }
+
+.visitor-count {
+  width: calc(100% - 30px);
+  max-width: 430px;
+  margin: 18px auto 30px;
+  text-align: center;
+  direction: rtl;
+  font-size: 16px;
+  font-weight: bold;
+  color: #666;
+}
+
+.channel-link a {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.8;
+}

@@ -6,7 +6,9 @@
   <title>کاهش حجم فیلم</title>
   <link rel="stylesheet" href="/style.css">
   <script data-goatcounter="https://video-compressor.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
+          async src="//gc.zgo.at/count.v5.js"
+          crossorigin="anonymous"
+          integrity="sha384-atnOLvQb9t+jTSipvd75X2yginT4PjVbqDdlJAmxMm+wYElFmeR6EmLP5bYeoRV"></script>
 </head>
 <body>
 
@@ -53,7 +55,26 @@
   </a>
 </footer>
 
+<div id="visitorCount" class="visitor-count">
+  👁 تعداد بازدید: در حال دریافت...
+</div>
+
 <script type="module" src="/app.js"></script>
+
+<script>
+setTimeout(async () => {
+  try {
+    const r = await fetch(
+      "https://video-compressor.goatcounter.com/counter//.json"
+    );
+    const data = await r.json();
+    document.getElementById("visitorCount").textContent =
+      "👁 تعداد بازدید: " + data.count;
+  } catch (e) {
+    console.log("Visitor counter:", e);
+  }
+}, 1500);
+</script>
 
 </body>
 </html>

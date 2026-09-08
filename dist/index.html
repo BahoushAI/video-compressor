@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>کاهش حجم فیلم</title>
   <script data-goatcounter="https://video-compressor.goatcounter.com/count"
-          async src="//gc.zgo.at/count.js"></script>
-  <script type="module" crossorigin src="/assets/index-BWx398Aw.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-C8esa_jo.css">
+          async src="//gc.zgo.at/count.v5.js"
+          crossorigin="anonymous"
+          integrity="sha384-atnOLvQb9t+jTSipvd75X2yginT4PjVbqDdlJAmxMm+wYElFmeR6EmLP5bYeoRV"></script>
+  <script type="module" crossorigin src="/assets/index-BSzJTkqY.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-B-2xV4TD.css">
 </head>
 <body>
 
@@ -54,6 +56,25 @@
   </a>
 </footer>
 
+<div id="visitorCount" class="visitor-count">
+  👁 تعداد بازدید: در حال دریافت...
+</div>
+
+
+<script>
+setTimeout(async () => {
+  try {
+    const r = await fetch(
+      "https://video-compressor.goatcounter.com/counter//.json"
+    );
+    const data = await r.json();
+    document.getElementById("visitorCount").textContent =
+      "👁 تعداد بازدید: " + data.count;
+  } catch (e) {
+    console.log("Visitor counter:", e);
+  }
+}, 1500);
+</script>
 
 </body>
 </html>
