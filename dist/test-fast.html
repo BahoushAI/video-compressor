@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تست فشرده‌سازی سریع</title>
+<body style="font-family:sans-serif;padding:20px">
+<h2>تست موتور سریع ویدئو</h2>
+<pre id="result">در حال بررسی...</pre>
+
+<script>
+const types = [
+  "video/mp4",
+  "video/mp4;codecs=avc1",
+  "video/webm",
+  "video/webm;codecs=vp8",
+  "video/webm;codecs=vp9"
+];
+
+const result = {};
+
+for (const type of types) {
+  result[type] =
+    MediaRecorder.isTypeSupported(type)
+      ? "پشتیبانی می‌شود"
+      : "پشتیبانی نمی‌شود";
+}
+
+document.getElementById("result").textContent =
+  JSON.stringify(result, null, 2);
+</script>
+</body>
+</html>

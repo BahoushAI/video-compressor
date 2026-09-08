@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تست WebCodecs</title>
+<body style="font-family:sans-serif;padding:20px">
+<h2>تست شتاب سخت‌افزاری ویدئو</h2>
+<pre id="result">در حال بررسی...</pre>
+<script>
+const r = document.getElementById("result");
+
+const result = {
+  WebCodecs: "VideoEncoder" in window ? "پشتیبانی می‌شود" : "پشتیبانی نمی‌شود",
+  VideoDecoder: "VideoDecoder" in window ? "پشتیبانی می‌شود" : "پشتیبانی نمی‌شود",
+  VideoFrame: "VideoFrame" in window ? "پشتیبانی می‌شود" : "پشتیبانی نمی‌شود"
+};
+
+r.textContent = JSON.stringify(result, null, 2);
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>کاهش حجم فیلم</title>
+  <script type="module" crossorigin src="/assets/index-D7lbcDiB.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-4wI4QzjS.css">
+</head>
+<body>
+
+<main class="container">
+  <h1>کاهش حجم فیلم</h1>
+
+  <p class="desc">
+    فیلم را انتخاب کنید و حجم آن را بدون تغییر وضوح کاهش دهید.
+  </p>
+
+  <input
+    id="videoInput"
+    type="file"
+    accept="video/*"
+    hidden
+  >
+
+  <button id="selectBtn">
+    انتخاب فیلم
+  </button>
+
+  <div id="status"></div>
+
+  <button id="compressBtn" style="display:none;">
+    کاهش حجم
+  </button>
+
+  <a
+    id="saveLink"
+    style="display:none;"
+    class="save"
+  >
+    ذخیره فیلم
+  </a>
+</main>
+
+
+</body>
+</html>

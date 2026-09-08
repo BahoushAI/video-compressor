@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تست Encoder</title>
+<body style="font-family:sans-serif;padding:20px">
+<h2>تست VideoEncoder</h2>
+<pre id="result">در حال بررسی...</pre>
+<script>
+(async () => {
+  const r = document.getElementById("result");
+  const codecs = [
+    "avc1.640028",
+    "avc1.4D401F",
+    "vp09.00.10.08",
+    "av01.0.08M.08"
+  ];
+
+  const out = {};
+
+  for (const codec of codecs) {
+    try {
+      const result = await VideoEncoder.isConfigSupported({
+        codec,
+        width: 1280,
+        height: 720,
+        bitrate: 2500000,
+        framerate: 30
+      });
+
+      out[codec] = result.supported === true
+        ? "پشتیبانی می‌شود"
+        : "پشتیبانی نمی‌شود";
+    } catch (e) {
+      out[codec] = "خطا: " + e.message;
+    }
+  }
+
+  r.textContent = JSON.stringify(out, null, 2);
+})();
+</script>
+</body>
+</html>

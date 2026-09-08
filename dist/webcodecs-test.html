@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>تست WebCodecs</title>
+<body style="font-family:sans-serif;padding:20px">
+<h2>تست سرعت WebCodecs</h2>
+
+<input id="file" type="file" accept="video/*">
+<br><br>
+<button id="run">شروع تست</button>
+<pre id="out">فیلم را انتخاب کنید.</pre>
+
+<script>
+const fileInput = document.getElementById("file");
+const run = document.getElementById("run");
+const out = document.getElementById("out");
+
+run.onclick = async () => {
+  const file = fileInput.files?.[0];
+
+  if (!file) {
+    out.textContent = "❌ ابتدا فیلم را انتخاب کنید.";
+    return;
+  }
+
+  if (!("VideoDecoder" in window) || !("VideoEncoder" in window)) {
+    out.textContent = "❌ WebCodecs در این مرورگر کامل نیست.";
+    return;
+  }
+
+  out.textContent =
+    "فایل انتخاب شد:\n" +
+    file.name + "\n" +
+    "حجم: " + (file.size / 1024 / 1024).toFixed(2) + " MB\n\n" +
+    "VideoDecoder: OK\n" +
+    "VideoEncoder: OK\n\n" +
+    "آماده تست واقعی WebCodecs.";
+};
+</script>
+</body>
+</html>
