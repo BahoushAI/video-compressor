@@ -60,16 +60,16 @@
 </div>
 
 <script>
-(function waitForGoatCounter() {
-  if (window.goatcounter && window.goatcounter.visit_count) {
-    window.goatcounter.visit_count({
-      append: "#visitorCount",
-      path: "TOTAL"
-    });
-  } else {
-    setTimeout(waitForGoatCounter, 200);
-  }
-})();
+fetch("https://video-compressor.goatcounter.com/counter/TOTAL.json")
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("visitorCount").textContent =
+      "👁 تعداد بازدیدکنندگان: " + data.count;
+  })
+  .catch(() => {
+    document.getElementById("visitorCount").textContent =
+      "👁 تعداد بازدیدکنندگان: در دسترس نیست";
+  });
 </script>
 
 <script type="module" src="/app.js"></script>
