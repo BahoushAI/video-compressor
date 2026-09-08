@@ -55,17 +55,21 @@
   </a>
 </footer>
 
-<div id="visitorCount" class="visitor-count"></div>
+<div id="visitorCount" class="visitor-count">
+  👁 تعداد بازدیدکنندگان: در حال دریافت...
+</div>
 
 <script>
-setTimeout(() => {
+(function waitForGoatCounter() {
   if (window.goatcounter && window.goatcounter.visit_count) {
     window.goatcounter.visit_count({
       append: "#visitorCount",
       path: "TOTAL"
     });
+  } else {
+    setTimeout(waitForGoatCounter, 200);
   }
-}, 500);
+})();
 </script>
 
 <script type="module" src="/app.js"></script>

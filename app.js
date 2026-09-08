@@ -259,32 +259,15 @@ compressBtn.addEventListener("click", async () => {
     saveLink.textContent = "ذخیره فیلم در گوشی";
     saveLink.style.display = "block";
 
-    saveLink.onclick = async (event) => {
-      if (!navigator.share || !window.File) return;
-
+    saveLink.onclick = (event) => {
       event.preventDefault();
 
-      try {
-        const file = new File(
-          [outputBlob],
-          compressedName,
-          { type: "video/mp4" }
-        );
-
-        if (navigator.canShare && !navigator.canShare({ files: [file] })) {
-          return;
-        }
-
-        await navigator.share({
-          files: [file],
-          title: "فیلم فشرده‌شده",
-          text: "فیلم فشرده‌شده را ذخیره کنید"
-        });
-      } catch (error) {
-        if (error?.name !== "AbortError") {
-          console.error("SAVE ERROR:", error);
-        }
-      }
+      const link = document.createElement("a");
+      link.href = previousOutputURL;
+      link.download = compressedName;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
     };
 
     status.innerHTML =

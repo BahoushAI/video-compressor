@@ -8,7 +8,7 @@
           async src="//gc.zgo.at/count.v5.js"
           crossorigin="anonymous"
           integrity="sha384-atnOLvQb9t+jTSipvd75X2yginT4PjVbqDdlJAmxMm+wYElFmeR6EmLP5bYeoRV"></script>
-  <script type="module" crossorigin src="/assets/index-BSzJTkqY.js"></script>
+  <script type="module" crossorigin src="/assets/index-B5mrT28e.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-B-2xV4TD.css">
 </head>
 <body>
@@ -57,24 +57,22 @@
 </footer>
 
 <div id="visitorCount" class="visitor-count">
-  👁 تعداد بازدید: در حال دریافت...
+  👁 تعداد بازدیدکنندگان: در حال دریافت...
 </div>
 
-
 <script>
-setTimeout(async () => {
-  try {
-    const r = await fetch(
-      "https://video-compressor.goatcounter.com/counter//.json"
-    );
-    const data = await r.json();
-    document.getElementById("visitorCount").textContent =
-      "👁 تعداد بازدید: " + data.count;
-  } catch (e) {
-    console.log("Visitor counter:", e);
+(function waitForGoatCounter() {
+  if (window.goatcounter && window.goatcounter.visit_count) {
+    window.goatcounter.visit_count({
+      append: "#visitorCount",
+      path: "TOTAL"
+    });
+  } else {
+    setTimeout(waitForGoatCounter, 200);
   }
-}, 1500);
+})();
 </script>
+
 
 </body>
 </html>
