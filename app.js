@@ -251,10 +251,41 @@ compressBtn.addEventListener("click", async () => {
 
     previousOutputURL = URL.createObjectURL(outputBlob);
 
-    saveLink.href = previousOutputURL;
-    saveLink.download =
+    const compressedName =
       selectedFile.name.replace(/\.[^/.]+$/, "") + "-compressed.mp4";
+
+    saveLink.href = previousOutputURL;
+    saveLink.download = compressedName;
+    saveLink.textContent = "ذخیره فیلم در گوشی";
     saveLink.style.display = "block";
+
+    saveLink.onclick = async (event) => {
+      if (!navigator.share || !window.File) return;
+
+      event.preventDefault();
+
+      try {
+        const file = new File(
+          [outputBlob],
+          compressedName,
+          { type: "video/mp4" }
+        );
+
+        if (navigator.canShare && !navigator.canShare({ files: [file] })) {
+          return;
+        }
+
+        await navigator.share({
+          files: [file],
+          title: "فیلم فشرده‌شده",
+          text: "فیلم فشرده‌شده را ذخیره کنید"
+        });
+      } catch (error) {
+        if (error?.name !== "AbortError") {
+          console.error("SAVE ERROR:", error);
+        }
+      }
+    };
 
     status.innerHTML =
       `تمام شد ✅<br>` +

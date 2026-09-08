@@ -55,26 +55,20 @@
   </a>
 </footer>
 
-<div id="visitorCount" class="visitor-count">
-  👁 تعداد بازدید: در حال دریافت...
-</div>
-
-<script type="module" src="/app.js"></script>
+<div id="visitorCount" class="visitor-count"></div>
 
 <script>
-setTimeout(async () => {
-  try {
-    const r = await fetch(
-      "https://video-compressor.goatcounter.com/counter//.json"
-    );
-    const data = await r.json();
-    document.getElementById("visitorCount").textContent =
-      "👁 تعداد بازدید: " + data.count;
-  } catch (e) {
-    console.log("Visitor counter:", e);
+setTimeout(() => {
+  if (window.goatcounter && window.goatcounter.visit_count) {
+    window.goatcounter.visit_count({
+      append: "#visitorCount",
+      path: "TOTAL"
+    });
   }
-}, 1500);
+}, 500);
 </script>
+
+<script type="module" src="/app.js"></script>
 
 </body>
 </html>
