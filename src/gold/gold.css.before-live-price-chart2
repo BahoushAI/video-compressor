@@ -1,0 +1,282 @@
+.gold-section {
+  width: calc(100% - 30px);
+  max-width: 430px;
+  margin: 25px auto;
+  direction: rtl;
+}
+
+.gold-card {
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.08);
+}
+
+.gold-title {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.gold-clock {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 8px;
+  text-align: center;
+  background: #f7f7f7;
+  border-radius: 10px;
+  color: #555;
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.gold-loading,
+.gold-error {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.gold-loading {
+  background: #fff8ef;
+  color: #9b5b10;
+}
+
+.gold-error {
+  background: #fff1f1;
+  color: #b00020;
+}
+
+.gold-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gold-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 145px 60px;
+  grid-template-areas: "name price chart";
+  align-items: center;
+  gap: 8px;
+  min-height: 55px;
+  padding: 8px 10px;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 12px;
+  direction: rtl;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.gold-row:nth-child(1) { background: #eefaf1; }
+.gold-row:nth-child(2) { background: #f2f6ff; }
+.gold-row:nth-child(3) { background: #fff5e8; }
+.gold-row:nth-child(4) { background: #f7f0ff; }
+.gold-row:nth-child(5) { background: #edfafa; }
+.gold-row:nth-child(6) { background: #fff0f4; }
+.gold-row:nth-child(7) { background: #f1f4f8; }
+.gold-row:nth-child(8) { background: #fff9e8; }
+.gold-row:nth-child(9) { background: #eef5ff; }
+.gold-row:nth-child(10) { background: #f5efff; }
+.gold-row:nth-child(11) { background: #edf9f3; }
+.gold-row:nth-child(12) { background: #fff2ec; }
+.gold-row:nth-child(13) { background: #f0f7ff; }
+.gold-row:nth-child(14) { background: #f8f2eb; }
+.gold-row:nth-child(15) { background: #f2f7ee; }
+
+/* طلای ۱۸ عیار */
+.gold-row:first-child {
+  min-height: 110px;
+  padding: 14px 12px;
+  background: #dff5e5;
+  border: 2px solid #4caf68;
+  box-shadow: 0 5px 16px rgba(35,126,65,.12);
+}
+
+.gold-row:first-child .gold-name {
+  font-size: 19px;
+  font-weight: 900;
+}
+
+.gold-row:first-child .gold-price {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.gold-row:first-child .gold-unit {
+  margin-top: 3px;
+  color: #367044;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.gold-row:first-child .gold-chart {
+  width: 60px;
+  min-width: 60px;
+  height: 70px;
+}
+
+.gold-row:first-child .gold-chart canvas {
+  width: 58px;
+  height: 58px;
+}
+
+.gold-name {
+  grid-area: name;
+  min-width: 0;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gold-price {
+  grid-area: price;
+  min-width: 0;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.gold-unit {
+  display: block;
+  margin-top: 1px;
+  color: #777;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.gold-chart {
+  grid-area: chart;
+  width: 60px;
+  min-width: 60px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: ltr;
+  overflow: hidden;
+}
+
+.gold-chart canvas {
+  display: block;
+  width: 54px;
+  height: 28px;
+}
+
+@media (max-width: 380px) {
+  .gold-section {
+    width: calc(100% - 20px);
+  }
+
+  .gold-card {
+    padding: 12px;
+  }
+
+  .gold-title {
+    font-size: 22px;
+  }
+
+  .gold-clock {
+    font-size: 14px;
+  }
+
+  .gold-row {
+    grid-template-columns: minmax(0,1fr) 120px 52px;
+    gap: 5px;
+    padding: 7px;
+  }
+
+  .gold-row:first-child {
+    min-height: 110px;
+    padding: 12px 7px;
+  }
+
+  .gold-row:first-child .gold-name {
+    font-size: 17px;
+  }
+
+  .gold-row:first-child .gold-price {
+    font-size: 19px;
+  }
+
+  .gold-row:first-child .gold-chart {
+    width: 52px;
+    min-width: 52px;
+  }
+
+  .gold-row:first-child .gold-chart canvas {
+    width: 48px;
+    height: 58px;
+  }
+
+  .gold-name {
+    font-size: 13px;
+  }
+
+  .gold-price {
+    font-size: 13px;
+  }
+
+  .gold-chart {
+    width: 52px;
+    min-width: 52px;
+  }
+
+  .gold-chart canvas {
+    width: 46px;
+    height: 25px;
+  }
+}
+@media (max-width: 380px) {
+  .gold-section {
+    width: calc(100% - 20px);
+  }
+
+  .gold-card {
+    padding: 12px;
+  }
+
+  .gold-title {
+    font-size: 22px;
+  }
+
+  .gold-clock {
+    font-size: 14px;
+  }
+
+  .gold-row {
+    grid-template-columns: minmax(0,1fr) 120px 52px;
+    gap: 5px;
+    padding: 7px;
+  }
+
+  .gold-name {
+    font-size: 13px;
+  }
+
+  .gold-price {
+    font-size: 13px;
+  }
+
+  .gold-chart {
+    width: 52px;
+    min-width: 52px;
+  }
+
+  .gold-chart canvas {
+    width: 46px;
+    height: 25px;
+  }
+}

@@ -1,0 +1,238 @@
+const HISTORY_KEY = "gold-price-history";
+const MAX_POINTS = 20;
+
+export function loadHistory() {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+
+    if (!raw) return {};
+
+    const data = JSON.parse(raw);
+
+    return data && typeof data === "object" && !Array.isArray(data)
+      ? data
+      : {};
+  } catch {
+    return {};
+  }
+}
+
+export function saveHistory(history) {
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  } catch {
+    // خطای ذخیره تاریخچه نباید برنامه را متوقف کند.
+  }
+}
+
+export function addHistoryPoint(history, id, value) {
+  const price = Number(value);
+
+  if (!Number.isFinite(price)) return;
+
+  if (!Array.isArray(history[id])) {
+    history[id] = [];
+  }
+
+  history[id].push({
+    time: Date.now(),
+    price
+  });
+
+  if (history[id].length > MAX_POINTS) {
+    history[id] = history[id].slice(-MAX_POINTS);
+  }
+}
+
+export function getTrend(history, id) {
+  const points = history[id] || [];
+
+  if (points.length < 2) {
+    return "neutral";
+  }
+
+  const previous = Number(points[points.length - 2].price);
+  const current = Number(points[points.length - 1].price);
+
+  if (!Number.isFinite(previous) || !Number.isFinite(current)) {
+    return "neutral";
+  }
+
+  if (current > previous) return "up";
+  if (current < previous) return "down";
+
+  return "neutral";
+}
+
+export function drawMiniChart(canvas, points, trend) {
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const width = canvas.width;
+  const height = canvas.height;
+
+  ctx.clearRect(0, 0, width, height);
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+
+  const validPoints = Array.isArray(points)
+    ? points
+        .map(point => ({
+          time: Number(point?.time),
+          price: Number(point?.price)
+        }))
+        .filter(point => Number.isFinite(point.price))
+    : [];
+
+  if (validPoints.length < 2) {
+    ctx.beginPath();
+    ctx.moveTo(5, height / 2);
+    ctx.lineTo(width - 5, height / 2);
+    ctx.strokeStyle = "rgba(90,90,90,.28)";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    return;
+  }
+
+  const values = validPoints.map(point => point.price);
+
+  let min = Math.min(...values);
+  let max = Math.max(...values);
+
+  const rawRange = max - min;
+  const padding =
+    rawRange === 0
+      ? Math.max(Math.abs(max) * 0.002, 1)
+      : rawRange * 0.16;
+
+  min -= padding;
+  max += padding;
+
+  const range = max - min || 1;
+
+  const left = 5;
+  const right = width - 5;
+  const top = 5;
+  const bottom = height - 7;
+
+  const coords = validPoints.map((point, index) => ({
+    x:
+      left +
+      (index / Math.max(1, validPoints.length - 1)) *
+        (right - left),
+
+    y:
+      bottom -
+      ((point.price - min) / range) *
+        (bottom - top)
+  }));
+
+  const lineColor =
+    trend === "up"
+      ? "#0b8f43"
+      : trend === "down"
+        ? "#d72f35"
+        : "#68717c";
+
+  const fillColor =
+    trend === "up"
+      ? "rgba(11,143,67,.14)"
+      : trend === "down"
+        ? "rgba(215,47,53,.13)"
+        : "rgba(104,113,124,.08)";
+
+  /* پس‌زمینه شبکه */
+  ctx.beginPath();
+
+  for (let i = 1; i <= 3; i++) {
+    const y = top + ((bottom - top) * i) / 4;
+    ctx.moveTo(left, y);
+    ctx.lineTo(right, y);
+  }
+
+  ctx.strokeStyle = "rgba(70,80,90,.09)";
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  /* ناحیه زیر روند */
+  ctx.beginPath();
+  ctx.moveTo(coords[0].x, bottom);
+
+  coords.forEach(point => {
+    ctx.lineTo(point.x, point.y);
+  });
+
+  ctx.lineTo(coords[coords.length - 1].x, bottom);
+  ctx.closePath();
+
+  ctx.fillStyle = fillColor;
+  ctx.fill();
+
+  /* خط اصلی با گوشه‌های نرم */
+  ctx.beginPath();
+
+  coords.forEach((point, index) => {
+    if (index === 0) {
+      ctx.moveTo(point.x, point.y);
+      return;
+    }
+
+    const previous = coords[index - 1];
+    const midX = (previous.x + point.x) / 2;
+
+    ctx.quadraticCurveTo(
+      previous.x,
+      previous.y,
+      midX,
+      (previous.y + point.y) / 2
+    );
+
+    ctx.quadraticCurveTo(
+      point.x,
+      point.y,
+      point.x,
+      point.y
+    );
+  });
+
+  ctx.strokeStyle = lineColor;
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  /* نقاط تاریخچه واقعی */
+  coords.forEach((point, index) => {
+    const isLast = index === coords.length - 1;
+
+    ctx.beginPath();
+    ctx.arc(
+      point.x,
+      point.y,
+      isLast ? 4 : 2.5,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fillStyle = "#ffffff";
+    ctx.fill();
+
+    ctx.strokeStyle = lineColor;
+    ctx.lineWidth = isLast ? 2.5 : 1.5;
+    ctx.stroke();
+  });
+
+  /* تأکید روی آخرین قیمت */
+  const last = coords[coords.length - 1];
+
+  ctx.beginPath();
+  ctx.arc(last.x, last.y, 6, 0, Math.PI * 2);
+  ctx.strokeStyle =
+    trend === "up"
+      ? "rgba(11,143,67,.22)"
+      : trend === "down"
+        ? "rgba(215,47,53,.22)"
+        : "rgba(104,113,124,.20)";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}

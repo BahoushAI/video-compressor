@@ -5,11 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>کاهش حجم فیلم</title>
   <script data-goatcounter="https://video-compressor.goatcounter.com/count"
+        data-goatcounter-settings='{"no_session":true}'
           async src="//gc.zgo.at/count.v5.js"
           crossorigin="anonymous"
           integrity="sha384-atnOLvQb9t+jTSipvd75X2yginT4PjVbqDdlJAmxMm+wYElFmeR6EmLP5bYeoRV"></script>
-  <script type="module" crossorigin src="/assets/index-B5mrT28e.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-B-2xV4TD.css">
+  <script type="module" crossorigin src="/assets/index-GoKxg0FM.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CduJFINX.css">
 </head>
 <body>
 
@@ -61,18 +62,23 @@
 </div>
 
 <script>
-(function waitForGoatCounter() {
-  if (window.goatcounter && window.goatcounter.visit_count) {
-    window.goatcounter.visit_count({
-      append: "#visitorCount",
-      path: "TOTAL"
-    });
-  } else {
-    setTimeout(waitForGoatCounter, 200);
-  }
-})();
+fetch("https://video-compressor.goatcounter.com/counter/TOTAL.json")
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById("visitorCount").textContent =
+      "👁 تعداد بازدیدکنندگان: " + data.count;
+  })
+  .catch(() => {
+    document.getElementById("visitorCount").textContent =
+      "👁 تعداد بازدیدکنندگان: در دسترس نیست";
+  });
 </script>
 
 
 </body>
 </html>
+
+<section id="chapter2-gold"></section>
+
+
+

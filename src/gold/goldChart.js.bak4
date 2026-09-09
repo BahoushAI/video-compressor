@@ -1,0 +1,129 @@
+const HISTORY_KEY = "gold-price-history";
+const MAX_POINTS = 20;
+
+export function loadHistory() {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+
+    if (!raw) return {};
+
+    const data = JSON.parse(raw);
+
+    return data && typeof data === "object" && !Array.isArray(data)
+      ? data
+      : {};
+  } catch {
+    return {};
+  }
+}
+
+export function saveHistory(history) {
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  } catch {
+    // خطای ذخیره تاریخچه نباید برنامه را متوقف کند.
+  }
+}
+
+export function addHistoryPoint(history, id, value) {
+  const price = Number(value);
+
+  if (!Number.isFinite(price)) return;
+
+  if (!Array.isArray(history[id])) {
+    history[id] = [];
+  }
+
+  history[id].push({
+    time: Date.now(),
+    price
+  });
+
+  if (history[id].length > MAX_POINTS) {
+    history[id] = history[id].slice(-MAX_POINTS);
+  }
+}
+
+export function getTrend(history, id) {
+  const points = history[id] || [];
+
+  if (points.length < 2) {
+    return "neutral";
+  }
+
+  const previous = Number(points[points.length - 2].price);
+  const current = Number(points[points.length - 1].price);
+
+  if (!Number.isFinite(previous) || !Number.isFinite(current)) {
+    return "neutral";
+  }
+
+  if (current > previous) return "up";
+  if (current < previous) return "down";
+
+  return "neutral";
+}
+
+export function drawMiniChart(canvas, points, trend) {
+  if (!canvas) return;
+  const ctx=canvas.getContext("2d");
+  if (!ctx) return;
+  const width=canvas.width,height=canvas.height;
+  ctx.clearRect(0,0,width,height);
+  ctx.lineJoin="round";
+  ctx.lineCap="round";
+
+  const validPoints=Array.isArray(points)
+    ? points.map(point=>({time:Number(point?.time),price:Number(point?.price)}))
+      .filter(point=>Number.isFinite(point.price))
+    : [];
+
+  ctx.fillStyle="#050807";
+  ctx.fillRect(0,0,width,height);
+
+  if(validPoints.length<2){
+    ctx.beginPath();
+    ctx.moveTo(4,height/2);
+    ctx.lineTo(width-4,height/2);
+    ctx.strokeStyle="#16c784";
+    ctx.lineWidth=4;
+    ctx.stroke();
+    return;
+  }
+
+  const values=validPoints.map(point=>point.price);
+  let min=Math.min(...values),max=Math.max(...values);
+  const rawRange=max-min;
+  const padding=rawRange===0?Math.max(Math.abs(max)*0.002,1):rawRange*0.18;
+  min-=padding;
+  max+=padding;
+
+  const range=max-min||1;
+  const left=5,right=width-5,top=5,bottom=height-5;
+
+  const coords=validPoints.map((point,index)=>({
+    x:left+(index/Math.max(1,validPoints.length-1))*(right-left),
+    y:bottom-((point.price-min)/range)*(bottom-top)
+  }));
+
+  ctx.beginPath();
+  coords.forEach((point,index)=>{
+    if(index===0) ctx.moveTo(point.x,point.y);
+    else ctx.lineTo(point.x,point.y);
+  });
+
+  ctx.strokeStyle="#16c784";
+  ctx.lineWidth=4;
+  ctx.stroke();
+
+  const last=coords[coords.length-1];
+  ctx.beginPath();
+  ctx.arc(last.x,last.y,4.5,0,Math.PI*2);
+  ctx.fillStyle="#16c784";
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(last.x,last.y,2,0,Math.PI*2);
+  ctx.fillStyle="#050807";
+  ctx.fill();
+}

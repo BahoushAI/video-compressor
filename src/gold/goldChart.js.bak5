@@ -1,0 +1,106 @@
+const HISTORY_KEY = "gold-price-history";
+const MAX_POINTS = 20;
+
+export function loadHistory() {
+  try {
+    const raw = localStorage.getItem(HISTORY_KEY);
+
+    if (!raw) return {};
+
+    const data = JSON.parse(raw);
+
+    return data && typeof data === "object" && !Array.isArray(data)
+      ? data
+      : {};
+  } catch {
+    return {};
+  }
+}
+
+export function saveHistory(history) {
+  try {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  } catch {
+    // خطای ذخیره تاریخچه نباید برنامه را متوقف کند.
+  }
+}
+
+export function addHistoryPoint(history, id, value) {
+  const price = Number(value);
+
+  if (!Number.isFinite(price)) return;
+
+  if (!Array.isArray(history[id])) {
+    history[id] = [];
+  }
+
+  history[id].push({
+    time: Date.now(),
+    price
+  });
+
+  if (history[id].length > MAX_POINTS) {
+    history[id] = history[id].slice(-MAX_POINTS);
+  }
+}
+
+export function getTrend(history, id) {
+  const points = history[id] || [];
+
+  if (points.length < 2) {
+    return "neutral";
+  }
+
+  const previous = Number(points[points.length - 2].price);
+  const current = Number(points[points.length - 1].price);
+
+  if (!Number.isFinite(previous) || !Number.isFinite(current)) {
+    return "neutral";
+  }
+
+  if (current > previous) return "up";
+  if (current < previous) return "down";
+
+  return "neutral";
+}
+
+export function drawMiniChart(canvas, points, trend) {
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const w=canvas.width, h=canvas.height;
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle="#050505";
+  ctx.fillRect(0,0,w,h);
+
+  const pts=(Array.isArray(points)?points:[])
+    .map(p=>Number(p?.price))
+    .filter(Number.isFinite);
+
+  if(pts.length<2) return;
+
+  let min=Math.min(...pts), max=Math.max(...pts);
+  const r=max-min || Math.max(Math.abs(max)*0.001,1);
+  min-=r*.15;
+  max+=r*.15;
+
+  const xy=pts.map((v,i)=>({
+    x:5+(i/(pts.length-1))*(w-10),
+    y:h-6-((v-min)/(max-min))*(h-12)
+  }));
+
+  ctx.beginPath();
+  xy.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));
+  ctx.strokeStyle="#20d66b";
+  ctx.lineWidth=2;
+  ctx.lineJoin="round";
+  ctx.lineCap="round";
+  ctx.stroke();
+
+  const last=xy[xy.length-1];
+  ctx.beginPath();
+  ctx.arc(last.x,last.y,3,0,Math.PI*2);
+  ctx.fillStyle="#20d66b";
+  ctx.fill();
+}
