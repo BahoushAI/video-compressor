@@ -112,7 +112,7 @@ function renderRows(root, items, history) {
 
       <div class="gold-chart">
         <canvas
-          width="108"
+          width="216"
           height="56"
           data-chart-id="${item.id}"
           aria-label="نمودار ${item.name}"

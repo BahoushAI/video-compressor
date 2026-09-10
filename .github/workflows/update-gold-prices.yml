@@ -1,0 +1,38 @@
+name: Update Gold Market Prices
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch market prices
+        run: node scripts/fetch-gold-prices.mjs
+
+      - name: Commit updated prices
+        run: |
+          if git diff --quiet -- public/gold-prices.json; then
+            echo "No price changes."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/gold-prices.json
+          git commit -m "chore: update gold market prices"
+          git push

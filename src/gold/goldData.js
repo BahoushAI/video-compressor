@@ -3,8 +3,6 @@ const GOLD_API_URL = "https://tabangohar.com/GheymatKhan/prices_in_table.html";
 export const GOLD_ITEMS = [
   { id: "gold18", name: "طلای ۱۸ عیار", unit: "تومان" },
   { id: "gold24", name: "طلای ۲۴ عیار", unit: "تومان" },
-  { id: "gold21", name: "طلای ۲۱ عیار", unit: "تومان" },
-  { id: "gold20", name: "طلای ۲۰ عیار", unit: "تومان" },
   { id: "silver", name: "نقره", unit: "تومان" },
   { id: "usd", name: "دلار", unit: "تومان" },
   { id: "eur", name: "یورو", unit: "تومان" },

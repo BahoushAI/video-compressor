@@ -142,13 +142,13 @@
 }
 
 .gold-row:first-child .gold-chart {
-  width: 60px;
-  min-width: 60px;
+  width: 104px;
+    min-width: 104px;
   height: 78px;
 }
 
 .gold-row:first-child .gold-chart canvas {
-  width: 60px;
+  width: 96px;
   height: 66px;
 }
 
@@ -184,8 +184,8 @@
 
 .gold-chart {
   grid-area: chart;
-  width: 60px;
-  min-width: 60px;
+  width: 120px;
+    min-width: 120px;
   height: 34px;
   display: flex;
   align-items: center;
@@ -196,8 +196,8 @@
 
 .gold-chart canvas {
   display: block;
-  width: 54px;
-  height: 28px;
+  width: 108px;
+    height: 28px;
 }
 
 @media (max-width: 380px) {
@@ -237,12 +237,12 @@
   }
 
   .gold-row:first-child .gold-chart {
-    width: 52px;
-    min-width: 52px;
+    width: 104px;
+    min-width: 104px;
   }
 
   .gold-row:first-child .gold-chart canvas {
-    width: 48px;
+    width: 96px;
     height: 58px;
   }
 
@@ -255,12 +255,12 @@
   }
 
   .gold-chart {
-    width: 52px;
-    min-width: 52px;
+    width: 104px;
+    min-width: 104px;
   }
 
   .gold-chart canvas {
-    width: 46px;
+    width: 92px;
     height: 25px;
   }
 }
@@ -296,12 +296,12 @@
   }
 
   .gold-chart {
-    width: 52px;
-    min-width: 52px;
+    width: 104px;
+    min-width: 104px;
   }
 
   .gold-chart canvas {
-    width: 46px;
+    width: 92px;
     height: 25px;
   }
 }
