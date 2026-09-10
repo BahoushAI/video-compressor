@@ -1,11 +1,11 @@
 {
   "items": {
     "gold24": 32241500,
-    "silver": 515030,
+    "silver": 516230,
     "usd": 235975,
     "eur": 274760,
     "aed": 64653,
-    "ounce": 4366,
+    "ounce": 4360,
     "silverOunce": 64,
     "coinEmami": 241010000,
     "coinBahar": 236355000,
@@ -13,7 +13,7 @@
     "quarterCoin": 65500000,
     "gramCoin": 35000000
   },
-  "updatedAt": "2026-09-10T16:18:03.061Z",
+  "updatedAt": "2026-09-10T16:31:35.730Z",
   "source": "TGJU",
   "errors": {}
 }
