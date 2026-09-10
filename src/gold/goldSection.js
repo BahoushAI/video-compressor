@@ -13,6 +13,8 @@ import {
   drawMiniChart
 } from "./goldChart.js";
 
+import { fetchGoldMarketPrices } from "./goldMarketData.js";
+
 export function createGoldSection() {
   const section = document.createElement("section");
 
@@ -149,7 +151,17 @@ export async function refreshGoldSection(root) {
   list.hidden = true;
 
   try {
-    const data = await fetchGoldPrices();
+    const [gold18Data, marketData] = await Promise.all([
+      fetchGoldPrices(),
+      fetchGoldMarketPrices()
+    ]);
+
+    const data = {
+      items: {
+        ...marketData.items,
+        ...gold18Data.items
+      }
+    };
 
     const history = loadHistory();
 
@@ -166,7 +178,18 @@ export async function refreshGoldSection(root) {
     if (!root.__goldHistoryTimer) {
       root.__goldHistoryTimer = setInterval(async () => {
         try {
-          const fresh = await fetchGoldPrices();
+          const [freshGold18, freshMarket] = await Promise.all([
+            fetchGoldPrices(),
+            fetchGoldMarketPrices()
+          ]);
+
+          const fresh = {
+            items: {
+              ...freshMarket.items,
+              ...freshGold18.items
+            }
+          };
+
           const latestHistory = loadHistory();
 
           Object.entries(fresh.items).forEach(([id, value]) => {
