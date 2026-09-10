@@ -61,16 +61,34 @@
 </div>
 
 <script>
-fetch("https://video-compressor.goatcounter.com/counter/TOTAL.json")
-  .then(response => response.json())
-  .then(data => {
-    document.getElementById("visitorCount").textContent =
-      "👁 تعداد بازدیدکنندگان: " + data.count;
-  })
-  .catch(() => {
-    document.getElementById("visitorCount").textContent =
-      "👁 تعداد بازدیدکنندگان: در دسترس نیست";
-  });
+(async () => {
+  const counter = document.getElementById("visitorCount");
+
+  try {
+    const response = await fetch(
+      "https://video-compressor.goatcounter.com/counter/TOTAL.json?t=" + Date.now(),
+      {
+        cache: "no-store",
+        mode: "cors"
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("HTTP " + response.status);
+    }
+
+    const data = await response.json();
+
+    if (!data || typeof data.count === "undefined") {
+      throw new Error("Invalid counter response");
+    }
+
+    counter.textContent = "👁 تعداد بازدیدکنندگان: " + data.count;
+  } catch (error) {
+    console.error("Visitor counter error:", error);
+    counter.textContent = "👁 تعداد بازدیدکنندگان: در دسترس نیست";
+  }
+})();
 </script>
 
 <script type="module" src="/app.js"></script>
