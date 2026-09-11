@@ -1,20 +1,20 @@
 {
   "items": {
-    "silver": 508590,
-    "quarterCoin": 65500000
+    "silver": 512290,
+    "eur": 274760,
+    "coinEmami": 241010000,
+    "quarterCoin": 65500000,
+    "gramCoin": 35000000
   },
-  "updatedAt": "2026-09-11T10:56:20.394Z",
+  "updatedAt": "2026-09-11T11:13:44.756Z",
   "source": "TGJU",
   "errors": {
     "gold24": "gold24: HTTP 404",
     "usd": "usd: HTTP 404",
-    "eur": "eur: HTTP 404",
     "aed": "aed: HTTP 404",
     "ounce": "ounce: HTTP 404",
     "silverOunce": "silverOunce: HTTP 404",
-    "coinEmami": "coinEmami: HTTP 404",
     "coinBahar": "coinBahar: HTTP 404",
-    "halfCoin": "halfCoin: HTTP 404",
-    "gramCoin": "gramCoin: HTTP 404"
+    "halfCoin": "halfCoin: HTTP 500"
   }
 }
