@@ -2,17 +2,17 @@
   "items": {
     "usd": 235975,
     "aed": 64653,
+    "ounce": 4342,
+    "silverOunce": 64,
     "coinEmami": 241010000,
     "halfCoin": 123000000
   },
-  "updatedAt": "2026-09-11T10:07:33.319Z",
+  "updatedAt": "2026-09-11T10:22:56.247Z",
   "source": "TGJU",
   "errors": {
     "gold24": "نرخ فعلی در صفحه پیدا نشد.",
     "silver": "نرخ فعلی در صفحه پیدا نشد.",
-    "eur": "eur: HTTP 404",
-    "ounce": "ounce: HTTP 404",
-    "silverOunce": "silverOunce: HTTP 404",
+    "eur": "نرخ فعلی در صفحه پیدا نشد.",
     "coinBahar": "coinBahar: HTTP 404",
     "quarterCoin": "quarterCoin: HTTP 404",
     "gramCoin": "gramCoin: HTTP 404"
