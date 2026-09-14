@@ -5,15 +5,15 @@
     "usd": 228600,
     "eur": 266440,
     "aed": 62840,
-    "ounce": 4336,
-    "silverOunce": 64,
+    "ounce": 4329,
+    "silverOunce": 63,
     "coinEmami": 236005000,
     "coinBahar": 231995000,
     "halfCoin": 120000000,
     "quarterCoin": 63000000,
     "gramCoin": 33000000
   },
-  "updatedAt": "2026-09-14T03:25:33.559Z",
+  "updatedAt": "2026-09-14T03:40:31.092Z",
   "source": "TGJU",
   "errors": {}
 }
