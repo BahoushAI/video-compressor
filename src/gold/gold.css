@@ -305,3 +305,216 @@
     height: 25px;
   }
 }
+
+.gold-18-controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin-top: 6px;
+}
+
+.gold-18-control-dot {
+  width: 11px;
+  height: 11px;
+  min-width: 11px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #777;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gold-18-control-dot:active {
+  transform: scale(.8);
+}
+
+.gold-18-copy {
+  position: relative;
+  touch-action: none;
+}
+
+.gold-18-copy-locked {
+  cursor: default !important;
+}
+
+.gold-18-copy-status {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  z-index: 20;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 7px rgba(34,197,94,.9);
+  transform: translate(-58px, -50%);
+  pointer-events: none;
+  animation: gold-18-live-blink 1s ease-in-out infinite;
+}
+
+@keyframes gold-18-live-blink {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: .15;
+    transform: translateY(-50%) scale(.8);
+  }
+}
+
+.gold-18-resize-left,
+.gold-18-resize-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  z-index: 30;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.gold-18-resize-left {
+  left: -8px;
+}
+
+.gold-18-resize-right {
+  right: -8px;
+}
+
+.gold-18-copy-locked .gold-18-resize-left,
+.gold-18-copy-locked .gold-18-resize-right {
+  display: none;
+}
+
+/* قیمت طلای ۱۸ عیار در کپی‌ها */
+.gold-18-copy .gold-price {
+  font-size: 30px !important;
+  font-weight: 900 !important;
+  line-height: 1.15 !important;
+  color: #d4a017 !important;
+  text-align: center;
+  direction: rtl;
+  letter-spacing: 0;
+  transition: color .25s ease, transform .25s ease;
+}
+
+.gold-18-copy .gold-price .gold-value {
+  font-size: 34px !important;
+  font-weight: 900 !important;
+  color: #d4a017 !important;
+}
+
+.gold-18-copy .gold-price .gold-unit {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  color: #8b6914 !important;
+  margin-right: 5px;
+}
+
+.gold-18-copy .gold-price.price-up,
+.gold-18-copy .gold-price.up {
+  color: #168a45 !important;
+}
+
+.gold-18-copy .gold-price.price-down,
+.gold-18-copy .gold-price.down {
+  color: #d33b3b !important;
+}
+
+.gold-18-copy .gold-price.price-up .gold-value,
+.gold-18-copy .gold-price.up .gold-value {
+  color: #168a45 !important;
+}
+
+.gold-18-copy .gold-price.price-down .gold-value,
+.gold-18-copy .gold-price.down .gold-value {
+  color: #d33b3b !important;
+}
+
+
+
+/* قیمت زنده طلای ۱۸ عیار در کپی‌ها */
+.gold-18-copy .gold-price,
+.gold-18-copy .gold-price .gold-value,
+.gold-18-copy .gold-price .gold-unit {
+  color: #168a45 !important;
+}
+
+.gold-18-copy .gold-price {
+  font-size: 30px !important;
+  font-weight: 900 !important;
+  line-height: 1.15 !important;
+  text-align: center;
+  direction: rtl;
+  transition: color .2s ease, transform .2s ease;
+}
+
+.gold-18-copy .gold-price .gold-value {
+  font-size: 34px !important;
+  font-weight: 900 !important;
+}
+
+.gold-18-copy .gold-price .gold-unit {
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  margin-right: 5px;
+}
+
+
+/* GOLD18 COPY RED TEST */
+
+/* فقط کپی‌های طلای ۱۸ */
+.gold-18-copy {
+  background: linear-gradient(
+    145deg,
+    #ffeded 0%,
+    #ffb8b8 45%,
+    #e63946 100%
+  ) !important;
+
+  border: 1px solid #b71c1c !important;
+}
+
+/* دستگیره‌های تغییر اندازه فقط برای کپی */
+.gold-18-copy .gold-18-resize-left,
+.gold-18-copy .gold-18-resize-right {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  z-index: 100;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.gold-18-copy .gold-18-resize-left {
+  left: -12px;
+}
+
+.gold-18-copy .gold-18-resize-right {
+  right: -12px;
+}
+
+/* وقتی حالت تغییر اندازه فعال است */
+.gold-18-copy.gold-18-resizing .gold-18-resize-left,
+.gold-18-copy.gold-18-resizing .gold-18-resize-right {
+  background: rgba(255,255,255,.25);
+}
+
+
+/* ONLY GOLD18 COPIES RED BACKGROUND */
+.gold-18-copy {
+  background: #d00000 !important;
+}
+
+/* ONLY GOLD18 COPIES */
+.gold-18-copy {
+  background: #ff6666 !important;
+}
