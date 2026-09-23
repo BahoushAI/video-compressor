@@ -1,0 +1,56 @@
+name: Gold 18 Eitaa
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  send-gold18:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get gold 18 price
+        id: price
+        run: |
+          python - <<'PY'
+          import json
+          import urllib.request
+          import urllib.parse
+          import os
+
+          url = "https://tabangohar.com/GheymatKhan/prices_in_table.html?item=c"
+
+          req = urllib.request.Request(
+              url,
+              headers={"User-Agent": "Mozilla/5.0"}
+          )
+
+          with urllib.request.urlopen(req, timeout=30) as r:
+              data = json.loads(r.read().decode("utf-8"))
+
+          value = data.get("c")
+
+          if value is None:
+              raise SystemExit("gold18 price not found")
+
+          text = str(value)
+          digits = str.maketrans("۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩", "01234567890123456789")
+          text = text.translate(digits).replace(",", "").replace("٬", "")
+          number = int("".join(c for c in text if c.isdigit()))
+
+          formatted = f"{number:,}"
+
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"price={number}\n")
+              f.write(f"formatted={formatted}\n")
+          PY
+
+      - name: Send to Eitaa
+        env:
+          EITAA_TOKEN: ${{ secrets.EITAA_TOKEN }}
+        run: |
+          curl -fsS -X POST \
+            "https://eitaayar.ir/api/${EITAA_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=@Abbasihouseholdappliances" \
+            --data-urlencode "text=🟢 طلای ۱۸ عیار: ${{ steps.price.outputs.formatted }} تومان"
