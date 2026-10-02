@@ -5,15 +5,16 @@
     "usd": 258465,
     "eur": 292350,
     "aed": 70800,
-    "ounce": 4183,
+    "ounce": 4175,
     "silverOunce": 61,
     "coinEmami": 260395000,
     "coinBahar": 252065000,
     "halfCoin": 135740000,
-    "quarterCoin": 73100000,
     "gramCoin": 37000000
   },
-  "updatedAt": "2026-10-02T08:53:41.323Z",
+  "updatedAt": "2026-10-02T15:09:27.193Z",
   "source": "TGJU",
-  "errors": {}
+  "errors": {
+    "quarterCoin": "نرخ فعلی در صفحه پیدا نشد."
+  }
 }
