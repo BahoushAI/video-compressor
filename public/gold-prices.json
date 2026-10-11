@@ -1,8 +1,9 @@
 {
   "items": {
     "gold24": 35063400,
-    "silver": 536760,
+    "silver": 539250,
     "usd": 264305,
+    "eur": 297090,
     "aed": 72510,
     "ounce": 4193,
     "silverOunce": 60,
@@ -12,9 +13,7 @@
     "quarterCoin": 75600000,
     "gramCoin": 37000000
   },
-  "updatedAt": "2026-10-11T18:12:46.759Z",
+  "updatedAt": "2026-10-11T21:58:27.475Z",
   "source": "TGJU",
-  "errors": {
-    "eur": "نرخ فعلی در صفحه پیدا نشد."
-  }
+  "errors": {}
 }
