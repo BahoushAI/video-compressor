@@ -1,7 +1,7 @@
 {
   "items": {
     "gold24": 34124900,
-    "silver": 477650,
+    "silver": 473740,
     "usd": 266110,
     "eur": 297070,
     "aed": 72785,
@@ -13,7 +13,7 @@
     "quarterCoin": 72500000,
     "gramCoin": 37000000
   },
-  "updatedAt": "2026-11-07T18:43:24.355Z",
+  "updatedAt": "2026-11-07T22:18:59.643Z",
   "source": "TGJU",
   "errors": {}
 }
