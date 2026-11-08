@@ -9,11 +9,12 @@
     "silverOunce": 51,
     "coinEmami": 257410000,
     "coinBahar": 248420000,
-    "halfCoin": 135530000,
     "quarterCoin": 71730000,
     "gramCoin": 37000000
   },
-  "updatedAt": "2026-11-08T19:04:28.021Z",
+  "updatedAt": "2026-11-08T22:48:14.297Z",
   "source": "TGJU",
-  "errors": {}
+  "errors": {
+    "halfCoin": "نرخ فعلی در صفحه پیدا نشد."
+  }
 }
