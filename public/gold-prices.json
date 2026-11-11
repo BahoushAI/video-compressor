@@ -1,19 +1,19 @@
 {
   "items": {
-    "gold24": 33241000,
-    "silver": 436080,
-    "usd": 259900,
-    "eur": 290650,
-    "aed": 71173,
-    "ounce": 4045,
+    "gold24": 33548400,
+    "silver": 452490,
+    "usd": 260605,
+    "eur": 291880,
+    "aed": 71447,
+    "ounce": 4050,
     "silverOunce": 52,
-    "coinEmami": 251660000,
-    "coinBahar": 245965000,
-    "halfCoin": 132860000,
-    "quarterCoin": 71330000,
+    "coinEmami": 253540000,
+    "coinBahar": 246710000,
+    "halfCoin": 133470000,
+    "quarterCoin": 72420000,
     "gramCoin": 37010000
   },
-  "updatedAt": "2026-11-11T02:44:57.425Z",
+  "updatedAt": "2026-11-11T09:52:15.922Z",
   "source": "TGJU",
   "errors": {}
 }
