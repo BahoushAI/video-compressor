@@ -1,10 +1,11 @@
 {
   "items": {
     "gold24": 33384700,
-    "silver": 465730,
+    "silver": 457800,
     "usd": 266900,
     "eur": 296930,
     "aed": 73138,
+    "ounce": 3897,
     "silverOunce": 50,
     "coinEmami": 253965000,
     "coinBahar": 247045000,
@@ -12,9 +13,7 @@
     "quarterCoin": 72490000,
     "gramCoin": 37000000
   },
-  "updatedAt": "2026-11-13T01:19:49.179Z",
+  "updatedAt": "2026-11-13T08:09:43.452Z",
   "source": "TGJU",
-  "errors": {
-    "ounce": "نرخ فعلی در صفحه پیدا نشد."
-  }
+  "errors": {}
 }
