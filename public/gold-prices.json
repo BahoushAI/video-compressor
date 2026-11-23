@@ -4,16 +4,17 @@
     "silver": 387170,
     "usd": 267375,
     "eur": 293800,
-    "aed": 72837,
-    "ounce": 3535,
+    "ounce": 3584,
     "silverOunce": 41,
     "coinEmami": 243155000,
     "coinBahar": 230150000,
     "halfCoin": 128410000,
-    "quarterCoin": 70380000,
-    "gramCoin": 33010000
+    "quarterCoin": 70380000
   },
-  "updatedAt": "2026-11-22T22:04:32.223Z",
+  "updatedAt": "2026-11-23T02:32:40.227Z",
   "source": "TGJU",
-  "errors": {}
+  "errors": {
+    "aed": "نرخ فعلی در صفحه پیدا نشد.",
+    "gramCoin": "نرخ فعلی در صفحه پیدا نشد."
+  }
 }
